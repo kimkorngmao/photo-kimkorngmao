@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import { Gallery } from './components/Gallery';
 import Head from 'next/head';
+import axiosInstance from '@/utils/axiosInstance';
 
 const ViewImage = ({ images, currentImage }) => {
   return (
@@ -15,7 +15,7 @@ const ViewImage = ({ images, currentImage }) => {
 };
 
 export async function getStaticPaths() {
-  const res = await axios.get('http://localhost:3000/api/images');
+  const res = await axiosInstance.get('/api/images');
   const images = res.data;
 
   const paths = images.map((image) => ({
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await axios.get(`http://localhost:3000/api/images`);
+  const res = await axiosInstance.get(`/api/images`);
   const images = res.data;
   const currentImage = images.find(image => image.id.toString() === params.id) || null;
   

@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { Gallery } from './components/Gallery';
+import axiosInstance from '@/utils/axiosInstance';
 
 export default function Home({ images }) {
   return (
@@ -11,7 +11,7 @@ export default function Home({ images }) {
 
 export async function getServerSideProps() {
   try {
-    const response = await axios.get('http://localhost:3000/api/images'); // Replace with your API endpoint
+    const response = await axiosInstance.get('/api/images');
     const images = response.data;
 
     return {
