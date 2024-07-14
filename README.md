@@ -17,7 +17,7 @@ cd photo-kimkorngmao
 Create a `.env` file in roo directory:
 
 ```env
-API_BASE_URL=http://localhost:3000/
+NEXT_PUBLIC_API_URL=http://localhost:3000/
 ```
 
 **Run the development server:**
