@@ -1,5 +1,5 @@
 import React from 'react';
-import { Gallery } from './components/Gallery';
+import { Gallery } from '../public/components/Gallery';
 import Head from 'next/head';
 import axios from 'axios';
 
