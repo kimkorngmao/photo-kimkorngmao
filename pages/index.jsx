@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Gallery } from '../public/components/Gallery';
+import { Gallery } from '../components/Gallery';
 
 export default function Home({ images }) {
   return (
