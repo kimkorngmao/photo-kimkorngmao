@@ -6,39 +6,57 @@ import axios from 'axios';
 const ViewImage = ({ images, currentImage }) => {
   return (
     <>
-        <Head>
-            <title>{currentImage.name || "kimkorngmao.photo"}</title>
-        </Head>
-      <Gallery images={images} id={currentImage.id} />
+      <Head>
+        <title>{currentImage?.name || "kimkorngmao.photo"}</title>
+      </Head>
+      <Gallery images={images} id={currentImage?.id} />
     </>
   );
 };
 
 export async function getStaticPaths() {
-  const res = await axios.get('https://photos.kimkorngmao.com/api/images');
-  const images = res.data;
+  try {
+    const res = await axios.get('https://photos.kimkorngmao.com/api/images');
+    const images = res.data;
 
-  const paths = images.map((image) => ({
-    params: { id: image.id.toString() }, 
-  }));
+    const paths = images.map((image) => ({
+      params: { id: image.id.toString() },
+    }));
 
-  return {
-    paths,
-    fallback: false
-  };
+    return {
+      paths,
+      fallback: false
+    };
+  } catch (error) {
+    console.error('Error fetching paths:', error);
+    return {
+      paths: [],
+      fallback: false
+    };
+  }
 }
 
 export async function getStaticProps({ params }) {
-  const res = await axios.get(`https://photos.kimkorngmao.com/api/images`);
-  const images = res.data;
-  const currentImage = images.find(image => image.id.toString() === params.id) || null;
-  
-  return {
-    props: {
-      images: images,
-      currentImage
-    }
-  };
+  try {
+    const res = await axios.get(`https://photos.kimkorngmao.com/api/images`);
+    const images = res.data;
+    const currentImage = images.find(image => image.id.toString() === params.id) || null;
+
+    return {
+      props: {
+        images,
+        currentImage
+      }
+    };
+  } catch (error) {
+    console.error('Error fetching images:', error);
+    return {
+      props: {
+        images: [],
+        currentImage: null
+      }
+    };
+  }
 }
 
 export default ViewImage;
