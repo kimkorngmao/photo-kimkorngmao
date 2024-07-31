@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     
     const id = filename.replace(/\.[^/.]+$/, '');
     const src = `/images/${filename}`;
-    const name = filename.replace(/-/g, ' ').replace(/\.[^/.]+$/, '');
+    const name = filename.replace(/^\d+_/, '').replace(/-/g, ' ').replace(/\.[^/.]+$/, '');
 
     const prev = index > 0 ? `/${filenames[index - 1].replace(/\.[^/.]+$/, '')}` : "";
     const next = index < filenames.length - 1 ? `/${filenames[index + 1].replace(/\.[^/.]+$/, '')}` : "";

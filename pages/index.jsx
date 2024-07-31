@@ -1,8 +1,23 @@
 import axios from 'axios';
 import { Gallery } from '../components/Gallery';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-export default function Home({ images }) {
+export default function Home() {
+  const [images, setImages] = useState([])
+
+  useEffect(()=>{
+    const getImages = async () => {
+      try {
+        // const response = await axios.get('https://photos.kimkorngmao.com/api/images');
+        const response = await axios.get('http://localhost:3000/api/images');
+        setImages(response.data);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    }
+    getImages();
+  },[])
   return (
     <>
       <Gallery images={images} />
@@ -26,24 +41,4 @@ export default function Home({ images }) {
       </ul>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  try {
-    const response = await axios.get('https://photos.kimkorngmao.com/api/images');
-    const images = response.data;
-
-    return {
-      props: {
-        images,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching images:', error);
-    return {
-      props: {
-        images: [],
-      },
-    };
-  }
 }

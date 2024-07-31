@@ -1,22 +1,25 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import MasonryLayout from './GridLayout'
+import Head from 'next/head'
+import Image from 'next/image'
 
-export const Gallery = ({ images,currentImage=null, id="" }) => {
+export const Gallery = ({ images, currentImage=null, id="" }) => {
     return (
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-1">
-            <title>{currentImage ? currentImage.name : "kimkorng.photo"}</title>
+        <MasonryLayout>
+            <Head>
+                <title>{currentImage ? currentImage.name : "kimkorng.photo"}</title>
+            </Head>
             {images && images.length > 0 &&
             images.map((image) => (
-                <div key={image.id} className={`${image.id === id && "flex justify-center w-full h-screen fixed inset-0 bg-[#87827F] z-40"}`}>
+                <div key={image.id} className={`${image.id === id ? "flex justify-center w-full h-screen fixed inset-0 bg-[#87827F] z-40" : "grow h-44 w-fit md:h-56"}`}>
                     <Link href={`/${image.id}`} className="cursor-zoom-in">
                         <Image
                             src={image.src}
                             alt={image.name}
                             width={image.width}
                             height={image.height}
-                            priority={image.id === id}
-                            className={`${image.id === id ? "object-contain duration-200 animate-fadeIn max-h-full min-w-full min-h-full w-auto block" : "h-56 w-full object-cover duration-200 hover:brightness-75"}`}
+                            className={`${image.id === id ? "object-contain duration-200 animate-fadeIn max-h-full min-w-full min-h-full w-auto block" : "h-full grow object-cover duration-200 hover:brightness-75"}`}
                         />
                     </Link>
                     {image.id === id &&
@@ -46,6 +49,6 @@ export const Gallery = ({ images,currentImage=null, id="" }) => {
                     }
                 </div>
             ))}
-        </div>
+        </MasonryLayout>
     )
 }
