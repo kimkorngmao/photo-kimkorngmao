@@ -12,7 +12,7 @@ const MasonryLayout = ({ children }) => {
   return (
     <Masonry
       breakpointCols={breakpointColumnsObj}
-      className="flex flex-row-reverse gap-1"
+      className="flex gap-1"
     >
       {children}
     </Masonry>
