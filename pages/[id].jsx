@@ -16,7 +16,7 @@ const ViewImage = ({ images, currentImage }) => {
 
 export async function getStaticPaths() {
   try {
-    const res = await axios.get('http://localhost:3000/api/images');
+    const res = await axios.get('https://photos.kimkorngmao.com/api/images');
     const images = res.data;
 
     const paths = images.map((image) => ({
@@ -38,7 +38,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   try {
-    const res = await axios.get(`http://localhost:3000/api/images`);
+    const res = await axios.get(`https://photos.kimkorngmao.com/api/images`);
     const images = res.data;
     const currentImage = images.find(image => image.id.toString() === params.id) || null;
 

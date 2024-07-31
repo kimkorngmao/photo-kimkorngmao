@@ -17,7 +17,7 @@ cd photo-kimkorngmao
 Create a `.env` file in roo directory:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:3000/
+NEXT_PUBLIC_API_URL=https://photos.kimkorngmao.com/
 ```
 
 **Run the development server:**

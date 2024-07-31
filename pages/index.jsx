@@ -10,7 +10,7 @@ export default function Home() {
     const getImages = async () => {
       try {
         // const response = await axios.get('https://photos.kimkorngmao.com/api/images');
-        const response = await axios.get('http://localhost:3000/api/images');
+        const response = await axios.get('https://photos.kimkorngmao.com/api/images');
         setImages(response.data);
       } catch (error) {
         console.log("Error: ", error);
